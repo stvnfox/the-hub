@@ -25,15 +25,14 @@
             return;
         } else {
             submitted.value = true;
-        }
-        
+        }      
     }
 </script>
 
 <template>
     <FormKit
         type="form"
-        id="registration-example"
+        id="registration-form"
         submit-label="Register"
         @submit="submitHandler"
         :actions="false"
