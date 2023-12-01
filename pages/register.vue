@@ -30,64 +30,72 @@
 </script>
 
 <template>
-    <FormKit
-        type="form"
-        id="registration-form"
-        submit-label="Register"
-        @submit="submitHandler"
-        :actions="false"
-        #default="{ value }"
-    >
-        <h1>Register!</h1>
-        <hr />
-        <FormKit
-            type="text"
-            name="name"
-            label="Your name"
-            placeholder="Jane Doe"
-            help="What do people call you?"
-            validation="required"
-        />
-        <FormKit
-            type="text"
-            name="email"
-            label="Your email"
-            placeholder="jane@example.com"
-            help="What email should we use?"
-            validation="required|email"
-        />
-        <div class="double">
-            <FormKit
-                type="password"
-                name="password"
-                label="Password"
-                validation="required|length:6|matches:/[^a-zA-Z]/"
-                :validation-messages="{
-                    matches: 'Please include at least one symbol',
-                }"
-                placeholder="Your password"
-                help="Choose a password"
-            />
-            <FormKit
-                type="password"
-                name="password_confirm"
-                label="Confirm password"
-                placeholder="Confirm password"
-                validation="required|confirm"
-                help="Confirm your password"
-            />
+    <section class="container flex items-center justify-center gap-8 min-h-screen">
+        <div class="w-1/2">
+            <h1 class="text-3xl mb-2">The Hub</h1>
+            <p>Where all the cool kids hang out</p>
         </div>
+        <div class="w-1/2">
+            <FormKit
+                type="form"
+                id="registration-form"
+                submit-label="Register"
+                @submit="submitHandler"
+                :actions="false"
+                #default="{ value }"
+            >
+                <h1>Register!</h1>
+                <hr />
+                <FormKit
+                    type="text"
+                    name="name"
+                    label="Your name"
+                    placeholder="Jane Doe"
+                    help="What do people call you?"
+                    validation="required"
+                />
+                <FormKit
+                    type="text"
+                    name="email"
+                    label="Your email"
+                    placeholder="jane@example.com"
+                    help="What email should we use?"
+                    validation="required|email"
+                />
+                <div class="double">
+                    <FormKit
+                        type="password"
+                        name="password"
+                        label="Password"
+                        validation="required|length:6|matches:/[^a-zA-Z]/"
+                        :validation-messages="{
+                            matches: 'Please include at least one symbol',
+                        }"
+                        placeholder="Your password"
+                        help="Choose a password"
+                    />
+                    <FormKit
+                        type="password"
+                        name="password_confirm"
+                        label="Confirm password"
+                        placeholder="Confirm password"
+                        validation="required|confirm"
+                        help="Confirm your password"
+                    />
+                </div>
 
-        <FormKit
-            type="submit"
-            label="Register"
-        />
-        <div v-if="submitError">
-            <p class="error">There was an error submitting your form.</p>
+                <FormKit
+                    type="submit"
+                    label="Register"
+                />
+                <div v-if="submitError">
+                    <p class="error">There was an error submitting your form.</p>
+                </div>
+                <div v-if="submitted">
+                    <p class="success">Your form was submitted successfully! Check your email to complete the registration</p>
+                </div>
+            </FormKit>
         </div>
-        <div v-if="submitted">
-            <p class="success">Your form was submitted successfully! Check your email to complete the registration</p>
-        </div>
-    </FormKit>
+    </section>
 </template>
 

@@ -26,34 +26,42 @@
 </script>
 
 <template>
-    <FormKit
-        type="form"
-        id="forgot-password-form"
-        submit-label="Submit"
-        @submit="submitHandler"
-        :actions="false"
-        #default="{ value }"
-    >
-        <h1>Forgot password</h1>
-        <hr />
-        <FormKit
-            type="text"
-            name="email"
-            label="Your email"
-            placeholder="jane@example.com"
-            validation="required|email"
-        />
-
-        <FormKit
-            type="submit"
-            label="Register"
-        />
-        <div v-if="submitError">
-            <p class="error">There was an error submitting your form.</p>
+    <section class="container flex items-center justify-center gap-8 min-h-screen">
+        <div class="w-1/2">
+            <h1 class="text-3xl mb-2">The Hub</h1>
+            <p>Where all the cool kids hang out</p>
         </div>
-        <div v-if="submitted">
-            <p class="success">Your request was submitted successfully! Check your email to reset your password</p>
+        <div class="w-1/2">
+            <FormKit
+                type="form"
+                id="forgot-password-form"
+                submit-label="Submit"
+                @submit="submitHandler"
+                :actions="false"
+                #default="{ value }"
+            >
+                <h1>Forgot password</h1>
+                <hr />
+                <FormKit
+                    type="text"
+                    name="email"
+                    label="Your email"
+                    placeholder="jane@example.com"
+                    validation="required|email"
+                />
+        
+                <FormKit
+                    type="submit"
+                    label="Register"
+                />
+                <div v-if="submitError">
+                    <p class="error">There was an error submitting your form.</p>
+                </div>
+                <div v-if="submitted">
+                    <p class="success">Your request was submitted successfully! Check your email to reset your password</p>
+                </div>
+            </FormKit>
         </div>
-    </FormKit>
+    </section>
 </template>
 
