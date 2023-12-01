@@ -1,36 +1,36 @@
+<!-- eslint-disable vue/no-unused-vars -->
 <script setup lang="ts">
     interface ILoginData {
-        email: string;
-        password: string;
+        email: string
+        password: string
     }
 
-    const emit = defineEmits(['logged-in'])
+    const emit = defineEmits(["logged-in"])
 
-    const supabase = useSupabaseClient();
+    const supabase = useSupabaseClient()
 
     const submitHandler = async (fields: ILoginData) => {
         const { error } = await supabase.auth.signInWithPassword({
             email: fields.email,
             password: fields.password,
-        });
+        })
 
-        if(error) {
-            console.log(error)
-            return;
+        if (error) {
+            // eslint-disable-next-line no-console
+            console.error(error)
         } else {
-            emit('logged-in')
-        } 
+            emit("logged-in")
+        }
     }
 </script>
 
 <template>
     <FormKit
-        type="form"
         id="login-form"
+        type="form"
         submit-label="Login"
-        @submit="submitHandler"
         :actions="false"
-        #default="{ value }"
+        @submit="submitHandler"
     >
         <h1>Login</h1>
         <hr />
@@ -62,4 +62,3 @@
         <p>Don't have an account? <NuxtLink to="/register">Register</NuxtLink></p>
     </div>
 </template>
-

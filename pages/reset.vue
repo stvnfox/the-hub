@@ -1,28 +1,27 @@
 <script setup lang="ts">
     interface IResetPasswordData {
-        password: string;
-        password_confirm: string;
+        password: string
+        password_confirm: string
     }
 
-    const supabase = useSupabaseClient();
-    const submitError = ref(false);
-    const errorMessage = ref('');
+    const supabase = useSupabaseClient()
+    const submitError = ref(false)
+    const errorMessage = ref("")
 
     const submitHandler = async (fields: IResetPasswordData) => {
         // Reset submit error
-        submitError.value = false;
-        
+        submitError.value = false
+
         const { error } = await supabase.auth.updateUser({
-            password: fields.password
+            password: fields.password,
         })
 
-        if(error) {
-            submitError.value = true;
+        if (error) {
+            submitError.value = true
             errorMessage.value = error.message
-            return;
         } else {
-            navigateTo('/')
-        }      
+            navigateTo("/")
+        }
     }
 </script>
 
@@ -30,12 +29,11 @@
     <authentication-page-base>
         <template #form>
             <FormKit
-                type="form"
                 id="reset-password-form"
+                type="form"
                 submit-label="Reset password"
-                @submit="submitHandler"
                 :actions="false"
-                #default="{ value }"
+                @submit="submitHandler"
             >
                 <h1>Reset password</h1>
                 <hr />
@@ -58,16 +56,18 @@
                     validation="required|confirm"
                     help="Confirm your password"
                 />
-        
+
                 <FormKit
                     type="submit"
                     label="Register"
                 />
                 <div v-if="submitError">
-                    <p class="error" v-text="errorMessage"/>
+                    <p
+                        class="error"
+                        v-text="errorMessage"
+                    />
                 </div>
             </FormKit>
         </template>
     </authentication-page-base>
 </template>
-

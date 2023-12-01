@@ -1,31 +1,31 @@
 <script setup lang="ts">
     interface IRegisterData {
-        name: string;
-        email: string;
-        password: string;
-        password_confirm: string;
+        name: string
+        email: string
+        password: string
+        password_confirm: string
     }
 
-    const supabase = useSupabaseClient();
-    const submitted = ref(false);
-    const submitError = ref(false);
+    const supabase = useSupabaseClient()
+    const submitted = ref(false)
+    const submitError = ref(false)
 
     const submitHandler = async (fields: IRegisterData) => {
         // Reset submit error
-        submitError.value = false;
+        submitError.value = false
 
         const { error } = await supabase.auth.signUp({
             email: fields.email,
             password: fields.password,
-        });
+        })
 
-        if(error) {
+        if (error) {
+            // eslint-disable-next-line no-console
             console.log(error)
-            submitError.value = true;
-            return;
+            submitError.value = true
         } else {
-            submitted.value = true;
-        }      
+            submitted.value = true
+        }
     }
 </script>
 
@@ -33,12 +33,11 @@
     <authentication-page-base>
         <template #form>
             <FormKit
-                type="form"
                 id="registration-form"
+                type="form"
                 submit-label="Register"
-                @submit="submitHandler"
                 :actions="false"
-                #default="{ value }"
+                @submit="submitHandler"
             >
                 <h1>Register!</h1>
                 <hr />
@@ -88,10 +87,11 @@
                     <p class="error">There was an error submitting your form.</p>
                 </div>
                 <div v-if="submitted">
-                    <p class="success">Your form was submitted successfully! Check your email to complete the registration</p>
+                    <p class="success">
+                        Your form was submitted successfully! Check your email to complete the registration
+                    </p>
                 </div>
             </FormKit>
         </template>
     </authentication-page-base>
 </template>
-

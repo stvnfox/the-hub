@@ -1,27 +1,27 @@
 <script setup lang="ts">
     interface IForgotPasswordData {
-        email: string;
+        email: string
     }
 
-    const supabase = useSupabaseClient();
-    const submitted = ref(false);
-    const submitError = ref(false);
+    const supabase = useSupabaseClient()
+    const submitted = ref(false)
+    const submitError = ref(false)
 
     const submitHandler = async (fields: IForgotPasswordData) => {
         // Reset submit error
-        submitError.value = false;
+        submitError.value = false
 
-        const { data, error } = await supabase.auth.resetPasswordForEmail(fields.email, {
-            redirectTo: 'http://localhost:3000/reset',
+        const { error } = await supabase.auth.resetPasswordForEmail(fields.email, {
+            redirectTo: "http://localhost:3000/reset",
         })
 
-        if(error) {
+        if (error) {
+            // eslint-disable-next-line no-console
             console.log(error)
-            submitError.value = true;
-            return;
+            submitError.value = true
         } else {
-            submitted.value = true;
-        }      
+            submitted.value = true
+        }
     }
 </script>
 
@@ -29,12 +29,11 @@
     <authentication-page-base>
         <template #form>
             <FormKit
-                type="form"
                 id="forgot-password-form"
+                type="form"
                 submit-label="Submit"
-                @submit="submitHandler"
                 :actions="false"
-                #default="{ value }"
+                @submit="submitHandler"
             >
                 <h1>Forgot password</h1>
                 <hr />
@@ -45,7 +44,7 @@
                     placeholder="jane@example.com"
                     validation="required|email"
                 />
-        
+
                 <FormKit
                     type="submit"
                     label="Register"
@@ -54,10 +53,11 @@
                     <p class="error">There was an error submitting your form.</p>
                 </div>
                 <div v-if="submitted">
-                    <p class="success">Your request was submitted successfully! Check your email to reset your password</p>
+                    <p class="success">
+                        Your request was submitted successfully! Check your email to reset your password
+                    </p>
                 </div>
             </FormKit>
         </template>
     </authentication-page-base>
 </template>
-
