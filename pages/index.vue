@@ -1,41 +1,44 @@
 <script setup lang="ts">
     const user = useSupabaseUser()
     const supabase = useSupabaseClient()
-    const isLoggedIn = ref(false)
+    const store = useGlobalStore()
+
+    const setIsLoggedInValue = (value: boolean) => {
+        store.$patch({
+            isLoggedIn: value,
+        })
+    }
 
     const logout = async () => {
         await supabase.auth.signOut()
-        isLoggedIn.value = false
+
+        setIsLoggedInValue(false)
     }
 
     onMounted(() => {
         if (!user.value) {
-            isLoggedIn.value = false
+            setIsLoggedInValue(false)
         } else {
-            isLoggedIn.value = true
+            setIsLoggedInValue(true)
         }
     })
 </script>
 
 <template>
-    <authentication-page-base>
+    <authentication-page-base v-if="!store.isLoggedIn">
         <template #form>
-            <login-form
-                v-if="!isLoggedIn"
-                @logged-in="isLoggedIn = true"
-            />
-            <pre
-                v-else
-                wrap
-            >
-                {{ user }}
-            </pre>
+            <login-form @logged-in="setIsLoggedInValue(true)" />
         </template>
     </authentication-page-base>
-    <button
-        v-if="isLoggedIn"
-        @click="logout"
-    >
-        Logout
-    </button>
+    <section v-else>
+        <div class="container min-h-screen">
+            <pre wrap>{{ user }}</pre>
+            <button
+                v-if="store.isLoggedIn"
+                @click="logout"
+            >
+                Logout
+            </button>
+        </div>
+    </section>
 </template>
