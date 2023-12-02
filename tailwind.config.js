@@ -1,14 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: [],
+    content: ["./formkit.config.ts"],
     theme: {
         extend: {
             container: {
                 center: true,
             },
             colors: {
-                purple: {
-                    DEFAULT: "",
+                secondary: {
                     100: "#b3aOca",
                     300: "#997fb8",
                     500: "#7f5ea6",

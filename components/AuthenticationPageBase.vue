@@ -7,7 +7,7 @@
                 alt="The Hub"
             />
         </div>
-        <div class="w-1/2">
+        <div class="w-1/2 border border-secondary-100 rounded-xl p-6">
             <slot name="form" />
         </div>
     </section>

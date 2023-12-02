@@ -17,6 +17,7 @@ export default defineNuxtConfig({
     },
     formkit: {
         autoImport: true,
+        configFile: "formkit.config.ts",
     },
     piniaPersistedstate: {
         cookieOptions: {

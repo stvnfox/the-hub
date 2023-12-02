@@ -3,23 +3,17 @@
     const supabase = useSupabaseClient()
     const store = useGlobalStore()
 
-    const setIsLoggedInValue = (value: boolean) => {
-        store.$patch({
-            isLoggedIn: value,
-        })
-    }
-
     const logout = async () => {
         await supabase.auth.signOut()
 
-        setIsLoggedInValue(false)
+        store.setIsLoggedInValue(false)
     }
 
     onMounted(() => {
         if (!user.value) {
-            setIsLoggedInValue(false)
+            store.setIsLoggedInValue(false)
         } else {
-            setIsLoggedInValue(true)
+            store.setIsLoggedInValue(true)
         }
     })
 </script>
@@ -27,7 +21,7 @@
 <template>
     <authentication-page-base v-if="!store.isLoggedIn">
         <template #form>
-            <login-form @logged-in="setIsLoggedInValue(true)" />
+            <login-form />
         </template>
     </authentication-page-base>
     <section v-else>
