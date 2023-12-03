@@ -31,7 +31,7 @@
         @submit="submitHandler"
     >
         <div class="mb-4">
-            <h1 class="text-lg">Welcome to <span class="text-secondary-700">The Hub</span></h1>
+            <h1 class="mb-3 text-lg">Welcome to <span class="text-secondary-700">The Hub</span></h1>
             <p class="text-xs font-semibold">Where Projects Thrive and Collaboration Flourishes.</p>
             <p class="text-xs">
                 Log in to elevate your project management experience. The Hub brings simplicity to complexity, making
@@ -58,7 +58,7 @@
         />
         <NuxtLink
             to="/forgot"
-            class="group w-fit text-xs text-secondary-500 hover:text-secondary-700 transition-colors"
+            class="group w-fit text-xs text-secondary-500 transition-colors hover:text-secondary-700"
         >
             <span class="underline-hover after:bg-secondary-700"> Lost password? </span>
         </NuxtLink>
@@ -70,11 +70,11 @@
         />
     </FormKit>
 
-    <div class="text-xs mt-4">
+    <div class="mt-4 text-xs">
         Don't have an account?
         <NuxtLink
             to="/register"
-            class="group w-fit text-sm text-secondary-500 hover:text-secondary-700 transition-colors"
+            class="group w-fit text-xs text-secondary-500 transition-colors hover:text-secondary-700"
         >
             <span class="underline-hover after:bg-secondary-700"> Register here </span>
         </NuxtLink>
