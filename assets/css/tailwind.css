@@ -4,6 +4,6 @@
 
 @layer utilities {
     .underline-hover {
-        @apply relative after:absolute after:rounded-lg after:-bottom-1 after:left-0 after:h-px after:w-0 after:transition-all after:delay-100 after:ease-in-out group-hover:after:w-full;
+        @apply relative after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:rounded-lg after:transition-all after:delay-100 after:ease-in-out group-hover:after:w-full;
     }
 }

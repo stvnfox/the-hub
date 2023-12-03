@@ -1,7 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     devtools: { enabled: false },
-    components: ['~/components/', '~/components/TheHub/', '~/components/TheHub/components/'],
+    build: {
+        transpile: ["trpc-nuxt"],
+    },
+    components: ["~/components/", "~/components/TheHub/", "~/components/TheHub/components/"],
     modules: [
         "@nuxtjs/supabase",
         "@formkit/nuxt",
@@ -9,9 +12,7 @@ export default defineNuxtConfig({
         "@pinia/nuxt",
         "@pinia-plugin-persistedstate/nuxt",
     ],
-    css: [
-      '@fortawesome/fontawesome-svg-core/styles.css'
-    ],
+    css: ["@fortawesome/fontawesome-svg-core/styles.css"],
     supabase: {
         redirectOptions: {
             login: "/",
