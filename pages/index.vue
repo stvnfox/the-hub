@@ -11,14 +11,7 @@
     })
 
     const user = useSupabaseUser()
-    const supabase = useSupabaseClient()
     const store = useGlobalStore()
-
-    const logout = async () => {
-        await supabase.auth.signOut()
-
-        store.setIsLoggedInValue(false)
-    }
 
     onMounted(() => {
         if (!user.value) {
@@ -35,15 +28,5 @@
             <login-form />
         </template>
     </authentication-page-base>
-    <section v-else>
-        <div class="container min-h-screen">
-            <pre wrap>{{ user }}</pre>
-            <button
-                v-if="store.isLoggedIn"
-                @click="logout"
-            >
-                Logout
-            </button>
-        </div>
-    </section>
+    <the-hub v-else />
 </template>

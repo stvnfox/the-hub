@@ -18,6 +18,11 @@
     },
     "devDependencies": {
         "@formkit/themes": "^1.3.2",
+        "@fortawesome/fontawesome-svg-core": "^6.5.1",
+        "@fortawesome/free-brands-svg-icons": "^6.5.1",
+        "@fortawesome/free-regular-svg-icons": "^6.5.1",
+        "@fortawesome/free-solid-svg-icons": "^6.5.1",
+        "@fortawesome/vue-fontawesome": "^3.0.5",
         "@nuxt/devtools": "latest",
         "@nuxtjs/eslint-config-typescript": "^12.1.0",
         "@nuxtjs/supabase": "^1.1.4",

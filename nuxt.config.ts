@@ -1,12 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     devtools: { enabled: false },
+    components: ['~/components/', '~/components/TheHub/', '~/components/TheHub/components/'],
     modules: [
         "@nuxtjs/supabase",
         "@formkit/nuxt",
         "@nuxtjs/tailwindcss",
         "@pinia/nuxt",
         "@pinia-plugin-persistedstate/nuxt",
+    ],
+    css: [
+      '@fortawesome/fontawesome-svg-core/styles.css'
     ],
     supabase: {
         redirectOptions: {
