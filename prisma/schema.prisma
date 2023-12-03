@@ -285,6 +285,7 @@ model projects {
   id            String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name          String          @db.VarChar
   created_at    DateTime?       @default(now()) @db.Timestamptz(6)
+  owner_id      String?         @db.Uuid
   tasks         tasks[]
   user_projects user_projects[]
 

@@ -18,8 +18,11 @@ export const projectsRouter = router({
                 name: z.string({
                     required_error: "Name is required",
                 }),
-                created_at: z.date({
-                    required_error: "Created at is required",
+                created_at: z.string().datetime({
+                    offset: true,
+                }),
+                owner_id: z.string({
+                    required_error: "Owner id is required",
                 }),
             })
         )
@@ -29,6 +32,7 @@ export const projectsRouter = router({
                     id: input.id,
                     name: input.name,
                     created_at: input.created_at,
+                    owner_id: input.owner_id,
                 },
             })
         }),
