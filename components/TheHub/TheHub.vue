@@ -5,7 +5,8 @@
     const { $client } = useNuxtApp()
 
     const getData = async () => {
-        const { data } = await $client.projects.get.useQuery()
+        console.log(user.value?.id)
+        const { data } = await $client.projects.get.useQuery({ id: user.value?.id })
         console.log(data.value)
     }
 

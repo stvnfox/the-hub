@@ -5,9 +5,28 @@ import { publicProcedure, router } from "../trpc"
 const prisma = new PrismaClient()
 
 export const projectsRouter = router({
-    get: publicProcedure.query(async () => {
-        return await prisma.user_projects.findMany()
-    }),
+    get: publicProcedure
+        .input(
+            z.object({
+                id: z.string({
+                    required_error: "Id is required",
+                }),
+            })
+        )
+        .query(async ({ input }) => {
+            return await prisma.projects.findMany({
+                where: {
+                    OR: [
+                        {
+                            owner_id: {
+                                equals: input.id,
+                            },
+                        },
+                        { user_ids: { has: input.id } },
+                    ],
+                },
+            })
+        }),
 
     create: publicProcedure
         .input(
