@@ -14,7 +14,7 @@
         ],
     })
 
-    const supabase = useSupabase
+    const supabase = useSupabase()
     const submitted = ref(false)
     const submitError = ref(false)
 

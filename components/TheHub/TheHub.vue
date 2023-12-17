@@ -3,7 +3,7 @@
     import { createUuid } from "~/helpers/uuid"
 
     const { $client } = useNuxtApp()
-    const supabase = useSupabase
+    const supabase = useSupabase()
     const userData = ref<User | null>(null)
 
     // const inviteUser = async (email: string, projectId: string) => {

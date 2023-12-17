@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import type { LoginData } from "~/composables/useSupabase"
 
-    const supabase = useSupabase
+    const supabase = useSupabase()
     const store = useUserStore()
 
     const submitHandler = async (fields: LoginData) => {

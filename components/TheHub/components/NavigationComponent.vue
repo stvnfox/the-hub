@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    const supabase = useSupabase
+    const supabase = useSupabase()
     const store = useUserStore()
 
     const signOut = async () => {

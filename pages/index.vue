@@ -10,7 +10,7 @@
         ],
     })
 
-    const supabase = useSupabase
+    const supabase = useSupabase()
     const store = useUserStore()
 
     const getUserData = async () => {

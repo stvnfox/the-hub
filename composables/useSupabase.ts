@@ -5,49 +5,53 @@ export interface LoginData {
     password: string
 }
 
-const config = useRuntimeConfig()
-const supabase = createClient(config.public.sbUrl, config.public.sbKey)
+export const useSupabase = () => {
+    const config = useRuntimeConfig()
+    const supabase = createClient(config.public.sbUrl, config.public.sbKey)
 
-export const useSupabase = {
-    signUp: async (params: LoginData) => {
-        const { error } = await supabase.auth.signUp({
-            email: params.email,
-            password: params.password,
-        })
+    return {
+        signUp: async (params: LoginData) => {
+            const { error } = await supabase.auth.signUp({
+                email: params.email,
+                password: params.password,
+            })
 
-        return error
-    },
+            return error
+        },
 
-    signIn: async (params: LoginData) => {
-        const { error } = await supabase.auth.signInWithPassword({
-            email: params.email,
-            password: params.password,
-        })
+        signIn: async (params: LoginData) => {
+            const { error } = await supabase.auth.signInWithPassword({
+                email: params.email,
+                password: params.password,
+            })
 
-        return error
-    },
+            return error
+        },
 
-    signOut: async () => {
-        await supabase.auth.signOut()
-    },
+        signOut: async () => {
+            await supabase.auth.signOut()
+        },
 
-    resetPassword: async (email: string) => {
-        const { error } = await supabase.auth.resetPasswordForEmail(email, {
-            redirectTo: "http://localhost:3000/reset",
-        })
+        resetPassword: async (email: string) => {
+            const { error } = await supabase.auth.resetPasswordForEmail(email, {
+                redirectTo: "http://localhost:3000/reset",
+            })
 
-        return error
-    },
+            return error
+        },
 
-    getUser: async () => {
-        const { data } = await supabase.auth.getUser()
+        getUser: async () => {
+            const { data } = await supabase.auth.getUser()
 
-        return data
-    },
+            return data
+        },
 
-    updateUser: async (email: string) => {
-        const { error } = await supabase.auth.updateUser({ email })
+        updateUser: async (password: string) => {
+            const { error } = await supabase.auth.updateUser({
+                password,
+            })
 
-        return error
-    },
+            return error
+        },
+    }
 }

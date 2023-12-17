@@ -15,7 +15,7 @@
         ],
     })
 
-    const supabase = useSupabase
+    const supabase = useSupabase()
     const submitError = ref(false)
     const errorMessage = ref("")
 
@@ -23,7 +23,7 @@
         // Reset submit error
         submitError.value = false
 
-        const error = await supabase.resetPassword(fields.password)
+        const error = await supabase.updateUser(fields.password)
 
         if (error) {
             submitError.value = true
