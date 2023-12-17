@@ -1,14 +1,11 @@
 <script setup lang="ts">
-    interface ILoginData {
-        email: string
-        password: string
-    }
+    import type { LoginData } from "~/composables/useSupabase"
 
-    const supabase = useSupabaseClient()
-    const store = useGlobalStore()
+    const supabase = useSupabase
+    const store = useUserStore()
 
-    const submitHandler = async (fields: ILoginData) => {
-        const { error } = await supabase.auth.signInWithPassword({
+    const submitHandler = async (fields: LoginData) => {
+        const error = await supabase.signIn({
             email: fields.email,
             password: fields.password,
         })
@@ -17,7 +14,9 @@
             // eslint-disable-next-line no-console
             console.error(error)
         } else {
-            store.setIsLoggedInValue(true)
+            store.$patch({
+                isLoggedIn: true,
+            })
         }
     }
 </script>

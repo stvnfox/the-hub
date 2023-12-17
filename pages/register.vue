@@ -1,11 +1,10 @@
 <script setup lang="ts">
-    interface IRegisterData {
+    interface RegisterData {
         name: string
         email: string
         password: string
         password_confirm: string
     }
-
     useHead({
         title: "The Hub | Register",
         meta: [
@@ -17,23 +16,23 @@
         ],
     })
 
-    const supabase = useSupabaseClient()
+    const supabase = useSupabase
     const submitted = ref(false)
     const submitError = ref(false)
 
-    const submitHandler = async (fields: IRegisterData) => {
+    const submitHandler = async (fields: RegisterData) => {
         // Reset submit error
         submitError.value = false
 
-        const { error } = await supabase.auth.signUp({
+        const error = await supabase.signUp({
             email: fields.email,
             password: fields.password,
         })
 
         if (error) {
-            // eslint-disable-next-line no-console
-            console.log(error)
             submitError.value = true
+
+            throw new Error(error.message)
         } else {
             submitted.value = true
         }

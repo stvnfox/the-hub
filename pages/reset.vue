@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    interface IResetPasswordData {
+    interface ResetPasswordData {
         password: string
         password_confirm: string
     }
@@ -15,17 +15,15 @@
         ],
     })
 
-    const supabase = useSupabaseClient()
+    const supabase = useSupabase
     const submitError = ref(false)
     const errorMessage = ref("")
 
-    const submitHandler = async (fields: IResetPasswordData) => {
+    const submitHandler = async (fields: ResetPasswordData) => {
         // Reset submit error
         submitError.value = false
 
-        const { error } = await supabase.auth.updateUser({
-            password: fields.password,
-        })
+        const error = await supabase.resetPassword(fields.password)
 
         if (error) {
             submitError.value = true

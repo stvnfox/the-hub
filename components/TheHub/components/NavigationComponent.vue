@@ -1,11 +1,13 @@
 <script setup lang="ts">
-    const supabase = useSupabaseClient()
-    const store = useGlobalStore()
+    const supabase = useSupabase
+    const store = useUserStore()
 
-    const logout = async () => {
-        await supabase.auth.signOut()
+    const signOut = async () => {
+        store.$patch({
+            isLoggedIn: false,
+        })
 
-        store.setIsLoggedInValue(false)
+        await supabase.signOut()
     }
 </script>
 <template>
@@ -16,7 +18,7 @@
                     <NuxtLink to="/profile"><font-awesome-icon :icon="['fas', 'user']" /></NuxtLink>
                 </li>
                 <li>
-                    <button @click="logout">Logout</button>
+                    <button @click="signOut">Sign out</button>
                 </li>
             </ul>
         </nav>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    interface IForgotPasswordData {
+    interface ResetPasswordData {
         email: string
     }
 
@@ -14,22 +14,20 @@
         ],
     })
 
-    const supabase = useSupabaseClient()
+    const supabase = useSupabase
     const submitted = ref(false)
     const submitError = ref(false)
 
-    const submitHandler = async (fields: IForgotPasswordData) => {
+    const submitHandler = async (fields: ResetPasswordData) => {
         // Reset submit error
         submitError.value = false
 
-        const { error } = await supabase.auth.resetPasswordForEmail(fields.email, {
-            redirectTo: "http://localhost:3000/reset",
-        })
+        const error = await supabase.resetPassword(fields.email)
 
         if (error) {
-            // eslint-disable-next-line no-console
-            console.log(error)
             submitError.value = true
+
+            throw new Error(error.message)
         } else {
             submitted.value = true
         }

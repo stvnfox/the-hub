@@ -10,14 +10,33 @@
         ],
     })
 
-    const user = useSupabaseUser()
-    const store = useGlobalStore()
+    const supabase = useSupabase
+    const store = useUserStore()
+
+    const getUserData = async () => {
+        const { user } = await supabase.getUser()
+
+        if (user) {
+            store.$patch({
+                isLoggedIn: true,
+                userData: {
+                    id: user.id,
+                    email: user.email,
+                },
+            })
+        } else {
+            store.$patch({
+                isLoggedIn: false,
+                userData: null,
+            })
+
+            throw new Error("No user found")
+        }
+    }
 
     onMounted(() => {
-        if (!user.value) {
-            store.setIsLoggedInValue(false)
-        } else {
-            store.setIsLoggedInValue(true)
+        if (store.isLoggedIn) {
+            getUserData()
         }
     })
 </script>

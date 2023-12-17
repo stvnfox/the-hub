@@ -1,14 +1,42 @@
 <script setup lang="ts">
+    import type { User } from "@supabase/supabase-js"
     import { createUuid } from "~/helpers/uuid"
 
-    const user = useSupabaseUser()
     const { $client } = useNuxtApp()
+    const supabase = useSupabase
+    const userData = ref<User | null>(null)
 
-    const getData = async () => {
-        console.log(user.value?.id)
-        const { data } = await $client.projects.get.useQuery({ id: user.value?.id })
-        console.log(data.value)
+    // const inviteUser = async (email: string, projectId: string) => {
+    //     try {
+    //         await $client.users.inviteUser.mutate({
+    //             email,
+    //             projectId,
+    //         })
+
+    //         console.log("user is invited")
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
+
+    // const getUserId = async () => {
+    //     const { data } = await $client.users.getUserId.useQuery({ email: "steven@wepburo.nl" })
+    //     console.log(data.value)
+    //     if (data.value) return data.value
+
+    //     // return inviteUser("steven@wepburo.nl", "c49ba46e-4542-4eea-a29e-bc66033b5933")
+    // }
+
+    const getUserData = async () => {
+        const { user } = await supabase.getUser()
+
+        userData.value = user
     }
+
+    // const getData = async () => {
+    //     const { data } = await $client.projects.get.useQuery({ id: user.value?.id })
+    //     console.log(data.value)
+    // }
 
     const addTestProject = async () => {
         try {
@@ -24,7 +52,9 @@
     }
 
     onMounted(() => {
-        getData()
+        getUserData()
+        // getData()
+        // getUserId()
     })
 </script>
 
@@ -34,7 +64,7 @@
         <div class="container flex-grow">
             <navigation-component />
             <button @click="addTestProject">Add test project</button>
-            <pre wrap>{{ user }}</pre>
+            <pre wrap>{{ userData }}</pre>
         </div>
     </section>
 </template>

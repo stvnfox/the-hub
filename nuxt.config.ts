@@ -4,6 +4,13 @@ export default defineNuxtConfig({
     build: {
         transpile: ["trpc-nuxt"],
     },
+    runtimeConfig: {
+        public: {
+            sbUrl: process.env.SUPABASE_URL,
+            sbKey: process.env.SUPABASE_KEY,
+            sbServiceKey: process.env.SUPABASE_SERVICE_KEY,
+        },
+    },
     components: ["~/components/", "~/components/TheHub/", "~/components/TheHub/components/"],
     modules: [
         "@nuxtjs/supabase",
@@ -11,6 +18,7 @@ export default defineNuxtConfig({
         "@nuxtjs/tailwindcss",
         "@pinia/nuxt",
         "@pinia-plugin-persistedstate/nuxt",
+        "@vueuse/nuxt",
     ],
     css: ["@fortawesome/fontawesome-svg-core/styles.css"],
     supabase: {
